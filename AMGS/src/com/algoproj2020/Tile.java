@@ -6,11 +6,11 @@ public abstract class Tile {
 	public static final Tile VOID = new BasicTile(0, 0, 0, Colours.get(000, -1, -1, -1), 0xFF000000);
     public static final Tile STONE = new BasicTile(1, 1, 0, Colours.get(-1, 333, -1, -1), 0xFF555555);
     public static final Tile GRASS = new BasicTile(2, 2, 0, Colours.get(-1, 131, 141, -1), 0xFF00FF00);
-	//public static final Tile WATER = new AnimatedTile(3, new int[][] { { 0, 5 }, { 1, 5 }, { 2, 5 }, { 1, 5 } },Colours.get(-1, 004, 115, -1), 0xFF0000FF, 1000);
+	public static final Tile WATER = new DynamicTile(3, new int[][] { { 0, 5 }, { 1, 5 }, { 2, 5 }, { 1, 5 } },Colours.get(-1, 004, 115, -1), 0xFF0000FF, 1000);
 	protected byte id;
 	protected boolean solid;
 	protected boolean emitter;
-	private int levelColour;
+	private int levelcolour;
 	
     public Tile(int id, boolean isSolid, boolean isEmitter, int levelColour) {
         this.id = (byte) id;
@@ -18,7 +18,7 @@ public abstract class Tile {
             throw new RuntimeException("Duplicate tile id on " + id);
         this.solid = isSolid;
         this.emitter = isEmitter;
-        this.levelColour = levelColour;
+        this.levelcolour = levelColour;
         tiles[id] = this;
     }
 	public byte getId() {
@@ -34,7 +34,6 @@ public abstract class Tile {
     public abstract void tick();
 	public abstract void render(Screen screen, Level level, int y, int x);
 	public int getLevelColour() {
-		// TODO Auto-generated method stub
-		return 0;
+		return levelcolour;
 	}
 }
