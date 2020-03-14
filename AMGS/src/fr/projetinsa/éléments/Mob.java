@@ -7,7 +7,7 @@ import fr.projetinsa.graphics.Tile;
 
 public abstract class Mob extends Entity {
 	
-	protected Sprite sprite;
+	protected Sprite sprite;       
 	protected int speed;
 	protected int numbsteps=0;
 	protected String name;

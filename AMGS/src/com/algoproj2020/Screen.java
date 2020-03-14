@@ -1,5 +1,6 @@
 package com.algoproj2020;
 
+import fr.projetinsa.graphics.Sprite;
 import fr.projetinsa.graphics.SpriteSheet;
 
 public class Screen {
@@ -71,7 +72,19 @@ public class Screen {
             }
         }
     }
-
+    public void renderPlayer(int xp, int yp, Sprite sprite) {
+    	 xp -= xOffset;
+         yp -= yOffset;
+         for (int y=0; y<sprite.SIZE;y++) {
+        	 int ya=y+yp;
+        	 for (int x=0; x<sprite.SIZE;x++) {
+        		 int xa=x+xp;
+        		 if (xa<-sprite.SIZE||xa>=width || ya<0||ya>=height)break;
+        		 if (xa<0)xa=0;
+        		 pixels[xa+ya*width]=sprite.pixels[x+y*sprite.SIZE];
+        	 }
+         }
+    }
     public void setOffset(int xOffset, int yOffset) {
         this.xOffset = xOffset;
         this.yOffset = yOffset;

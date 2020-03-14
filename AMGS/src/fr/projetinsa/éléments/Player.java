@@ -6,6 +6,7 @@ import com.algoproj2020.Screen;
 import com.algoproj2020.UserInputs;
 
 import fr.projetinsa.graphics.Font;
+import fr.projetinsa.graphics.Sprite;
 
 public class Player extends Mob {
 	
@@ -50,7 +51,9 @@ public class Player extends Mob {
 
 	
 	public void rendu(Screen screen) {
-		 int xTile = 0;
+		screen.renderPlayer(x, y, Sprite.pokemon0);
+	}
+		 /*int xTile = 0;
 	        int yTile = 28;
 	        int walkingSpeed = 4;
 	        int flipTop = (numbsteps >> walkingSpeed) & 1;
@@ -97,7 +100,7 @@ public class Player extends Mob {
 	            Font.render(username, screen, xOffset - ((username.length() - 1) / 2 * 8), yOffset - 10,
 	                    Colours.get(-1, -1, -1, 555), 1);
 	        }
-	}
+	}*/
 	public boolean hascollided(int xa, int ya) {
         int xMin = 0;
         int xMax = 7;
