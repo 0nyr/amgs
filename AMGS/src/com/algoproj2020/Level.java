@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-
+import fr.projetinsa.graphics.Tile;
 import fr.projetinsa.éléments.Entity;
  
 public class Level {

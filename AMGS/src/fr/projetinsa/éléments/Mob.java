@@ -1,15 +1,18 @@
 package fr.projetinsa.éléments;
 
 import com.algoproj2020.Level;
-import com.algoproj2020.Tile;
+
+import fr.projetinsa.graphics.Sprite;
+import fr.projetinsa.graphics.Tile;
 
 public abstract class Mob extends Entity {
 	
+	protected Sprite sprite;
 	protected int speed;
 	protected int numbsteps=0;
 	protected String name;
 	protected boolean ismoving;
-	protected int movingdir;
+	protected int movingdir;// 0 up; 1 down; 2 left; 3 right.
 	protected int scale=1;
 	
 	public Mob(Level level, String name, int x, int y, int speed) {
@@ -19,6 +22,13 @@ public abstract class Mob extends Entity {
 		this.y=y;
 		this.speed=speed;
 	}
+	/**
+	 * 
+	 * @param xa xa=1 <-> mob moves to the right; xa= -1 <-> mob moves to the left;
+	 * xa= 0 <-> mob doesn't move
+	 * @param ya xa=1 <-> mob moves downward; ya= -1 <-> mob moves upward
+	 * ya= 0 <-> mob doesn't move
+	 */
 	public void move(int xa, int ya) {
 		if(xa!=0 && ya!=0) {
 			move(xa,0);
@@ -27,7 +37,8 @@ public abstract class Mob extends Entity {
 			return;
 		}
 		numbsteps++;
-		if(!hascollided(xa,ya)) {
+		if(!hascollided(xa,ya)) {// If there is no collision we move,
+			
 			if(ya<0)movingdir=0;
 			if(ya>0)movingdir=1;
 			if(xa<0)movingdir=2;

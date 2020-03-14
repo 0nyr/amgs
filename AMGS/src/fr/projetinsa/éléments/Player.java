@@ -4,7 +4,8 @@ import com.algoproj2020.Colours;
 import com.algoproj2020.Level;
 import com.algoproj2020.Screen;
 import com.algoproj2020.UserInputs;
-import com.algoproj2020.Font;
+
+import fr.projetinsa.graphics.Font;
 
 public class Player extends Mob {
 	
@@ -38,6 +39,7 @@ public class Player extends Mob {
 			ismoving=false;
 		}
 		if (level.getTile(this.x >> 3, this.y >> 3).getId() == 3) {
+			
 			isSwimming = true;
 		}
 	    if (isSwimming && level.getTile(this.x >> 3, this.y >> 3).getId() != 3) {
@@ -46,7 +48,7 @@ public class Player extends Mob {
 	    tickCount++;
 	}
 
-	@Override
+	
 	public void rendu(Screen screen) {
 		 int xTile = 0;
 	        int yTile = 28;
