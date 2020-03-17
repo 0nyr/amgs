@@ -17,8 +17,7 @@ public abstract class Tile {
 	
     public Tile(int id, boolean isSolid, boolean isEmitter, int levelColour) {
         this.id = (byte) id;
-        if (tiles[id] != null)
-            throw new RuntimeException("Duplicate tile id on " + id);
+        if (tiles[id] != null)throw new RuntimeException("Duplicate tile id on " + id);
         this.solid = isSolid;
         this.emitter = isEmitter;
         this.levelcolour = levelColour;
@@ -34,7 +33,7 @@ public abstract class Tile {
 		return emitter;
 	}
 
-    public abstract void tick();
+    public abstract void update();
 	public abstract void render(Screen screen, Level level, int y, int x);
 	public int getLevelColour() {
 		return levelcolour;

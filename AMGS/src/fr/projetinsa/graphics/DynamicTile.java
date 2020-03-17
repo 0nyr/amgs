@@ -15,7 +15,7 @@ public class DynamicTile extends BasicTile {
         this.animationSwitchDelay = animationSwitchDelay;
     }
 
-    public void tick() {
+    public void update() {
         if ((System.currentTimeMillis() - lastIterationTime) >= (animationSwitchDelay)) {
             lastIterationTime = System.currentTimeMillis();
             currentAnimationIndex = (currentAnimationIndex + 1) % animationTileCoords.length;

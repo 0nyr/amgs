@@ -11,7 +11,7 @@ public class BasicTile extends Tile {
         this.tileid = x + y * 32;
         this.tilecolour = tileColour;
     }
-	public void tick() {
+	public void update() {
     }
 	
 	@Override

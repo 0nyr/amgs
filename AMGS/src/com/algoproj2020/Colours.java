@@ -6,10 +6,10 @@ public class Colours {
 	}
 
 	public static int get(int colour) {
-			if(colour<0)return 25;
-			int r=colour/100%10;
-			int g=colour/10%10;
-			int b=colour%10;
-			return r*36+g*6+b;
+			if(colour<0)return 255;// If the colour is strictly negative then it is considered transparent.
+			int r=colour/100%10;// We retrieve the right bit
+			int g=colour/10%10;// We retrieve the central bit
+			int b=colour%10;// We retrieve the left bit
+			return r*36+g*6+b;// On retourne l'index du tableau colour associé à cette couleur.
 		}
 }

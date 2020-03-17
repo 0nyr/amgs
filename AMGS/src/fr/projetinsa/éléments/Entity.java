@@ -15,5 +15,5 @@ public abstract class Entity {
 	}
 	public abstract void update();
 	
-	public abstract void rendu (Screen screen);
+	public abstract void render (Screen screen);
 }

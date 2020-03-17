@@ -36,7 +36,7 @@ public class AMGS extends Canvas implements Runnable {
 	private int[] pixels =((DataBufferInt) image.getRaster().getDataBuffer()).getData();// On associe cet objet à un tableau d'entier correspondant aux couleurs de chaques pixels
 	//raster=rectangular array of pixels
 	//We are converting the image object into an array of pixels
-	private int[] colours=new int[6*6*6]; 
+	private int[] colours=new int[6*6*6]; // 
 	
 	private Screen screen;
 	public UserInputs inputs;
@@ -47,8 +47,8 @@ public class AMGS extends Canvas implements Runnable {
 	////////////////////////////////////////// CONSTRUCTEUR (VALIDE) /////////////////////////////////////////////////////////////////////////////////////
 	public AMGS() {
 			
-			this.setMinimumSize(DIMENSIONS);
-			this.setMaximumSize(new Dimension(DIMENSIONS));
+			this.setMinimumSize(DIMENSIONS);// On choisit la taille minimale
+			this.setMaximumSize(new Dimension(DIMENSIONS));// On choisit la taille maximale
 			this.setPreferredSize(new Dimension(DIMENSIONS));// On ajuste les dimensions de notre canvas
 			frame =new JFrame(NAME);
 			frame.setLayout(new BorderLayout());// On sélectionne la stratégie d'affichage que l'on veut utiliser pour notre fenêtre (BorderLayout).
@@ -65,26 +65,6 @@ public class AMGS extends Canvas implements Runnable {
 		new AMGS().start();//on appelle la méthode start
 		//test t=new test();
 	}
-	
-	public void init() {//checked
-		int index =0; 
-		for(int r=0;r<6;r++) {
-			for(int g=0;g<6;g++) {
-				for(int b=0;b<6;b++) {
-					int rr=(r*255/5);
-					int gg=(g*255/5);
-					int bb=(b*255/5);
-					colours[index++]=rr<<16 | gg<<8 | bb;
-				}
-			}
-		}
-		screen=new Screen(WIDTH,HEIGHT,new SpriteSheet("images/sprite_sheet.png"));
-		inputs=new UserInputs(this, frame);
-		level=new Level("images/water_test_level.png");
-		player=new Player(level, 0, 0, inputs);
-		level.addEntity(player);
-	}
-	
 	public synchronized void start() {//checked
 		running=true;
 		thread=new Thread(this);// On associe un thread à la classe AMGS
@@ -98,8 +78,80 @@ public class AMGS extends Canvas implements Runnable {
 			e.printStackTrace();
 		}
 	}
+	@Override
+	public void run() {//checked
+		long offtime=System.nanoTime() ;
+		double nsperUpdt = 1000000000D/60D;
+		
+		int updates=0;
+		int frames=0;
+		
+		long Timer=System.currentTimeMillis();
+		double deltat=0;
+		
+		init();
+
+		while(running) {
+			long now = System.nanoTime();
+			deltat+=(now-offtime)/nsperUpdt;
+			offtime=now;
+			boolean shouldRender=true;
+			
+			while(deltat>=1) {
+				updates++;
+				update();
+				deltat-=1;
+				shouldRender=true;
+			}
+			try {
+				Thread.sleep(2);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+			if (shouldRender) {
+				frames++;
+				Render();
+			}
+			if(System.currentTimeMillis()-Timer>=1000) {
+				Timer+=1000;
+				//System.out.println(updates+"updates , "+frames+" frames");
+				frames=0;
+				updates=0;
+			}
+		}
+		
+	}
+/**
+ * Initialize the game.
+ */
+	public void init() {
+		int index =0; 
+		for(int r=0;r<6;r++) {
+			for(int g=0;g<6;g++) {
+				for(int b=0;b<6;b++) {
+	/*Each color will be represented on 3 data bits. Each bit will take a value between 0 and 5. 
+	 * The right bit represents the shade of blue,
+	 * the middle bit represents the shade of green and the left bit represents the shade of red.*/
+					int rr=(r*255/5);
+					int gg=(g*255/5);
+					int bb=(b*255/5);
+					colours[index++]=rr<<16 | gg<<8 | bb;
+					/*Each shade (red blue green ) is coded on 8 bits. The first 8 bits represent the shade of blue,
+					 *the 8 next ones the shade of green,
+					 *and the 8 last ones the shade of red*/
+				}
+			}
+		}
+		screen=new Screen(WIDTH,HEIGHT,new SpriteSheet("images/sprite_sheet.png"));
+		inputs=new UserInputs(this, frame);
+		level=new Level("images/water_test_level.png");
+		player=new Player(level, 0, 0, inputs);
+		level.addEntity(player);
+	}
 	
-	public void Render() {//checked
+	
+	public void Render() {
 		BufferStrategy strat=getBufferStrategy();
 		if(strat==null){
 			createBufferStrategy(3);//triple buffering so that we get two backup frames.
@@ -125,53 +177,10 @@ public class AMGS extends Canvas implements Runnable {
 		strat.show();
 
 	}	 
-	public void Updt() {//checked
+	
+	public void update() {
 		UpdatesCount++;
-		level.Updt();
-	}
-	@Override
-	public void run() {//checked
-		long offtime=System.nanoTime() ;
-		double nsperUpdt = 1000000000D/60D;
-		
-		int updates=0;
-		int frames=0;
-		
-		long Timer=System.currentTimeMillis();
-		double deltat=0;
-		
-		init();
-
-		while(running) {
-			long now = System.nanoTime();
-			deltat+=(now-offtime)/nsperUpdt;
-			offtime=now;
-			boolean shouldRender=true;
-			
-			while(deltat>=1) {
-				updates++;
-				Updt();
-				deltat-=1;
-				shouldRender=true;
-			}
-			try {
-				Thread.sleep(2);
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-			if (shouldRender) {
-				frames++;
-				Render();
-			}
-			if(System.currentTimeMillis()-Timer>=1000) {
-				Timer+=1000;
-				//System.out.println(updates+"updates , "+frames+" frames");
-				frames=0;
-				updates=0;
-			}
-		}
-		
+		level.update();
 	}
 }
 

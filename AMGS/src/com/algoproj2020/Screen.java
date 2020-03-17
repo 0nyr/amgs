@@ -23,7 +23,13 @@ public class Screen {
     public int height;
 
     public SpriteSheet sheet;
-
+    
+   /**
+    * Constructor of the class
+    * @param width
+    * @param height
+    * @param sheet
+    */
     public Screen(int width, int height, SpriteSheet sheet) { 
         this.width = width;
         this.height = height;
@@ -31,7 +37,15 @@ public class Screen {
 
         pixels = new int[width * height];
     }
-
+    /**
+     * Tu ne comprends pas cette méthode
+     * @param xPos
+     * @param yPos
+     * @param tile
+     * @param colour
+     * @param mirrorDir
+     * @param scale
+     */
     public void render(int xPos, int yPos, int tile, int colour, int mirrorDir, int scale) {
         xPos -= xOffset;
         yPos -= yOffset;// permet de déplacer la map lorsque le personnnage se déplace
@@ -72,6 +86,12 @@ public class Screen {
             }
         }
     }
+    /**
+     * This method display the player sprite on the screen
+     * @param xp the x coordinate of the top left corner player the sprite
+     * @param yp the y coordinate of the top left corner player the sprite
+     * @param sprite the player sprite
+     */
     public void renderPlayer(int xp, int yp, Sprite sprite) {
     	 xp -= xOffset;
          yp -= yOffset;
@@ -85,6 +105,11 @@ public class Screen {
         	 }
          }
     }
+    /**
+     * This method sets the value of the attributes xOffset and yOffset
+     * @param xOffset the xOffset value
+     * @param yOffset the yOffset value
+     */
     public void setOffset(int xOffset, int yOffset) {
         this.xOffset = xOffset;
         this.yOffset = yOffset;
