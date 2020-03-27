@@ -132,7 +132,8 @@ public class AMGS extends Canvas implements Runnable {
 				for(int b=0;b<6;b++) {
 	/*Each color will be represented on 3 data bits. Each bit will take a value between 0 and 5. 
 	 * The right bit represents the shade of blue,
-	 * the middle bit represents the shade of green and the left bit represents the shade of red.*/
+	 * the middle bit represents the shade of green and the left bit represents the shade of red.
+	 * For each color 4 different shades will be available*/
 					int rr=(r*255/5);
 					int gg=(g*255/5);
 					int bb=(b*255/5);

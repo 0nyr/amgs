@@ -13,8 +13,7 @@ public abstract class Mob extends Entity {
 	protected String name;// name of the mob
 	protected boolean ismoving;// true if the player is moving false if not
 	protected int movingdir;// 0 up; 1 down; 2 left; 3 right.
-	protected int scale=1;
-	
+	protected int scale=1;/* scale=taille du personnage sur la map/taille du personnage sur le sprite sheet*/
 	/**
 	 * Constructor of the class
 	 * @param level the level in which is the player

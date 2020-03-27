@@ -56,7 +56,7 @@ public class Level {
 	 private void loadTiles() {
 		 int[] tileColours = this.image.getRGB(0, 0, width, height, null, 0, width);// We convert the background image into an RGB array of pixels. 
 		 for (int y = 0; y < height; y++) {
-			 for (int x = 0; x < width; x++) {
+			 for (int x = 0; x < width; x++) {// On parcours les pixels de l'image
 				 tileCheck: for (Tile t : Tile.tiles) {
 					 if (t != null && t.getLevelColour() == tileColours[x + y * width]) {
 						 /*We go through the level pixel by pixel and

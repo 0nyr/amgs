@@ -14,13 +14,14 @@ public class SpriteSheet {
 	public int height;
 	
 	public int pixels[];
-	
-	public static  SpriteSheet sheet =new SpriteSheet("images/pokemon.png");
-	
+	/**
+	 * Constructor of the class
+	 * @param path the path used to access the image
+	 */
 	public SpriteSheet(String path) {
 		BufferedImage image = null;
 		try { 
-			image=ImageIO.read(new File(path));//problème le code n'arrive pas à &ccéder à l'image
+			image=ImageIO.read(new File(path));// we store the spritesheet in a BufferedImage
 		}catch(IOException e){
 			e.printStackTrace();
 		}
@@ -29,9 +30,15 @@ public class SpriteSheet {
 		this.width=image.getWidth();
 		this.height=image.getHeight();
 		
-		pixels = image.getRGB(0, 0, width, height, null, 0, width);//Returns an array of integer pixels in the default RGB color model from the image .
+		pixels = image.getRGB(0, 0, width, height, null, 0, width);/*We convert the spritesheet into an RGB array
+		Each pixels of the image will be represented by an integer of the form 0xAARRGGBB (hexadecimal representation)*/
+		
 		for(int i=0;i<pixels.length;i++) {
-			pixels[i]=(pixels[i] & 0xff)/64;// We use & oxff in order to be sure that all colours are opaque and we divide by 64 to limit the number of colours that are used.
+			pixels[i]=(pixels[i] & 0xFFFFFF)/64;
+		//*On représente notre image sous la forme d'un tableau de pixels ne contenant que les quatre couleurs suivantes:
+		//*255/3*0,255/3*0,255/3*0 (BLACK) 255/3*1,255/3*1,255/3*1 (DARK GREY) 255/3*2,255/3*2,255/3*2 (LIGHT GREY) 255,255,255 (WHITE) 
+		
 		}	
+		
 	}
 }

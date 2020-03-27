@@ -50,15 +50,14 @@ public class Screen {
         xPos -= xOffset;
         yPos -= yOffset;// permet de déplacer la map lorsque le personnnage se déplace
 
-        boolean mirrorX = (mirrorDir & BIT_MIRROR_X) > 0;
-        boolean mirrorY = (mirrorDir & BIT_MIRROR_Y) > 0;
+        boolean mirrorX = (mirrorDir & BIT_MIRROR_X) > 0;// revient à écrire mirrodir==1
+        boolean mirrorY = (mirrorDir & BIT_MIRROR_Y) > 0;// revient à écrire mirrodir==2
 
         int scaleMap = scale -1;
         int xTile = tile % 32;//tile =xtile +32*ytile avec tile l'indice de la tuile correspondante dans le tableau tiles
         int yTile = tile / 32;
         int tileOffset = (xTile << 3) + (yTile << 3) * sheet.width;//remarque: xTile << 3 revient à multiplier par 8, i.e le nombre de pixel par tile de sprite sheet.
         // si on a un sprite dont les tuiles sont en 4 pixels par tuile, alors on fera xTile<<2
-        // ainsi lorsqu'on parcours le
         for (int y = 0; y < 8; y++) {
             int ySheet = y;
             if (mirrorY)

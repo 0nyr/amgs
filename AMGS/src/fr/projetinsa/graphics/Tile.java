@@ -6,10 +6,10 @@ import com.algoproj2020.Screen;
 
 public abstract class Tile {
 	public static final Tile[] tiles=new Tile[256];
-	public static final Tile VOID = new SolidTile(0, 0, 0, Colours.get(000, -1, -1, -1), 0xFF000000); // On fixe les contours de la map comme étant solides pour empêcher le joueur de dortir de la map.
-    public static final Tile STONE = new BasicTile(1, 1, 0, Colours.get(-1, 333, -1, -1), 0xFF555555);
-    public static final Tile GRASS = new BasicTile(2, 2, 0, Colours.get(-1, 131, 141, -1), 0xFF00FF00);
-	public static final Tile WATER = new DynamicTile(3, new int[][] { { 0, 5 }, { 1, 5 }, { 2, 5 }, { 1, 5 } },Colours.get(-1, 004, 115, -1), 0xFF0000FF, 1000);
+	public static final Tile VOID = new BasicTile(0, 0, 0, Colours.get(000, -1, -1, -1), 0xFF000000); // On fixe les contours de la map comme étant solides pour empêcher le joueur de dortir de la map.
+    public static final Tile STONE = new SolidTile(1, 1, 0, Colours.get(222, 0, 051, 202),0xFF55555e);
+    public static final Tile GRASS = new BasicTile(2, 2, 0, Colours.get(-1, 222, 111, -1), 0xFF00FF00);
+	public static final Tile WATER = new DynamicTile(3, new int[][] { { 0, 5 }, { 1, 5 }, { 2, 5 }, { 1, 5 } },Colours.get(-1, 510, 520, -1), 0xFF0000FF, 1000);
 	protected byte id;
 	protected boolean solid;
 	protected boolean emitter;
