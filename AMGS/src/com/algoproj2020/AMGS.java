@@ -11,8 +11,10 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
+
 import fr.projetinsa.graphics.SpriteSheet;
 import fr.projetinsa.éléments.Player;
+import fr.projetinsa.éléments.Spaceship;
 
 public class AMGS extends Canvas implements Runnable {
  
@@ -42,6 +44,7 @@ public class AMGS extends Canvas implements Runnable {
 	public UserInputs inputs;
 	public Level level;
 	public Player player;
+	public Spaceship spaceship;
 	
 	private Thread thread;
 	////////////////////////////////////////// CONSTRUCTEUR (VALIDE) /////////////////////////////////////////////////////////////////////////////////////
@@ -147,8 +150,11 @@ public class AMGS extends Canvas implements Runnable {
 		screen=new Screen(WIDTH,HEIGHT,new SpriteSheet("images/sprite_sheet.png"));
 		inputs=new UserInputs(this, frame);
 		level=new Level("images/water_test_level.png");
-		player=new Player(level, 0, 0, inputs);
+		player=new Player(level, 314, 200, inputs, "Zack");
+		spaceship=new Spaceship(level,250,250);
 		level.addEntity(player);
+		level.addEntity(spaceship);
+		/*Attention à l'ordre dans lequel on ajoutes les entités. la dernière ajoutée sera au premier plan*/
 	}
 	
 	
@@ -160,7 +166,7 @@ public class AMGS extends Canvas implements Runnable {
 		}
 		
 		int xoffset=player.x-(screen.width/2);
-		int yoffset=player.y-(screen.height/2);
+		int yoffset=player.y-(screen.height/2);// Permet de garder le joueur au milieu d l'écran
 		
 		level.rendertile(screen,xoffset,yoffset);
 		level.renderEntities(screen);

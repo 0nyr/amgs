@@ -6,6 +6,8 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 
+import com.algoproj2020.UserInputs.Key;
+
 public class UserInputs implements KeyListener {
 
     public UserInputs(AMGS game, JFrame frame) {
@@ -35,6 +37,7 @@ public class UserInputs implements KeyListener {
     public Key down = new Key();
     public Key left = new Key();
     public Key right = new Key();
+    public Key space = new Key();
 
     public void keyPressed(KeyEvent e) {
         toggleKey(e.getKeyCode(), true);
@@ -59,6 +62,9 @@ public class UserInputs implements KeyListener {
         }
         if (keyCode == KeyEvent.VK_D || keyCode == KeyEvent.VK_RIGHT) {
             right.toggle(isPressed);
+        }
+        if (keyCode == KeyEvent.VK_SPACE || keyCode == KeyEvent.VK_SPACE) {
+            space.toggle(isPressed);
         }
     }
 }

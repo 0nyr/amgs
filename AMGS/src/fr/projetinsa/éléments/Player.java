@@ -11,8 +11,8 @@ import fr.projetinsa.graphics.Sprite;
 public class Player extends Mob {
 	
 	private UserInputs input;// Key handler
-	private int colour=Colours.get(-1,0,530,543);// Ici on contrôle les couleurs du sprite du joueur.
-	//Colours.get(couleur des parties noirs,.., couleur des parties blanches)
+	private int colour=Colours.get(-1,500,555,0);// Ici on contrôle les couleurs du sprite du joueur.
+	//Colours.get(couleur des parties noirs,.., couleur des parties blanches) 
 	/*Dans le sprite du joueur, la nuance de gris clair prendra la couleur définit en RGB de la manière suivante:
 	 * R=5*255/5
 	 * G=3*255/5
@@ -28,7 +28,7 @@ public class Player extends Mob {
      * @param y the y coordinate of the player
      * @param input the key handler used to move the player 
      */
-	public Player(Level level, int x, int y, UserInputs input) {
+	public Player(Level level, int x, int y, UserInputs input, String username) {
 		super(level,"Player",x,y,1);
 		this.input=input;
 		this.username=username;
@@ -48,7 +48,7 @@ public class Player extends Mob {
 		xa= -1 <-> the player is moving to the left; xa=0 the player is not moving along the x axis; xa= 1 the player is moving to the right
 		*/
 		int ya=0;//idem
-
+		if(input.space.isPressed())shoot();// On tire en appuyant sur la barre espace.
 		if(input.up.isPressed()){ya--;}
 		if(input.down.isPressed()){ya++;}
 		if(input.right.isPressed()){xa++;}
@@ -74,6 +74,10 @@ public class Player extends Mob {
 	    tickCount++;
 	}
 
+	private void shoot() {
+		// TODO Auto-generated method stub
+		
+	}
 	public void render(Screen screen) {
 		//screen.renderPlayer( x, y, Sprite.pokemon0);
 	
@@ -86,19 +90,9 @@ public class Player extends Mob {
 		 * */
 		int flipBottom = (numbsteps >> walkingSpeed) & 1;
 		
-		if (movingdir == 1) {
-		/*If the player is moving down, then we display the sprite corresponding to the downward walk of the player*/
-			xTile += 2;
-		} else if (movingdir > 1) {
-			xTile += 4+ ((numbsteps >> walkingSpeed) & 1) * 2;
-			//On récupère les sprites de dépalcement horizontaux en fonction du nombre de pas
-			flipTop = (movingdir - 1) % 2;
-			// si le joueur va à droite (movingdir=3) fliptop =0 s'il va à gauche fliptop=1
-		}
-
 		int modifier = 8 * scale;/* ont a besoin du modifier pour adapter le personnage à l'échelle 
 		se fait tuile par tuile et. la tailles des tuiles est de 8 pixels d'où le facteur 8*/
-		int xOffset = x - modifier / 2;// que représente xOffset et yOffset???????????????????????????????????????????????????????????????????????
+		int xOffset = x - modifier / 2;
 		int yOffset = y - modifier/2 -4;
 		/*Les deux lignes de code ci dessus permettent de créer des coordonnées xOffset et yOffset qui repère 
 		 * le point situé entre les pieds du sprite du personnage et non plus le coin supérieur gauche du sprite personnage comme le faisaient 
@@ -107,24 +101,38 @@ public class Player extends Mob {
 			int waterColour = 0;
 			yOffset += 4;
 			if (tickCount % 60 < 15) {
-				waterColour = Colours.get(-1, -1, 522, -1);// très important de comprendre le fonctionnement de cette méthoode
+				waterColour = Colours.get(-1, -1, 350, -1);// très important de comprendre le fonctionnement de cette méthoode
 			} else if (15 <= tickCount % 60 && tickCount % 60 < 30) {
-				yOffset -= 1;// On fait osciller le personnage de haut en bas
-				waterColour = Colours.get(-1, 522, 511, -1);
+				yOffset -= 1;// On fait osciller le personnage de haut en bas 
+				waterColour = Colours.get(-1, 350, 250, -1);
 			} else if (30 <= tickCount % 60 && tickCount % 60 < 45) {
-				waterColour = Colours.get(-1, 511, -1, 522);
+				waterColour = Colours.get(-1, 250, -1, 350);
 			} else {
 				yOffset -= 1;// On fait osciller le personnage de haut en bas une deuxième fois pour donner de la rapidité au mouvement.
-				waterColour = Colours.get(-1, 522, 511, -1);
+				waterColour = Colours.get(-1, 350, 250, -1);
 			}
+
 		/* La partie ci-dessous s'ocuppe de rendre les mouvements d'eau 
 		 * crées par la nage du personnage à la place de son corps lorque celui-ci est dans l'eau.*/
 			screen.render(xOffset, yOffset + 3, 0 + 27 * 32, waterColour, 0x00, 1);//très important de comprendre le fonctionnement de cette méthode
 			screen.render(xOffset + 8, yOffset + 3, 0 + 27 * 32, waterColour, 0x01, 1);
 		}
-		// La partie du code ci-dessous ne s'occupe que de rendre le visage du personnage.
-		screen.render(xOffset + (modifier * flipTop), yOffset, xTile + yTile * 32, colour, flipTop, scale);
-		screen.render(xOffset + modifier - (modifier * flipTop), yOffset, (xTile + 1) + yTile * 32, colour, flipTop,scale);
+		if (movingdir == 1 || movingdir==0) {
+			/*If the player is moving down, then we display the sprite corresponding to the downward walk of the player*/
+				xTile += 2*movingdir;
+				// La partie du code ci-dessous ne s'occupe que de rendre le visage du personnage.
+				screen.render(xOffset, yOffset, xTile + yTile * 32, colour, 0x00, scale);
+				screen.render(xOffset + modifier, yOffset, (xTile + 1) + yTile * 32, colour, 0x00,scale);
+			} else if (movingdir > 1) {
+				xTile += 4+ ((numbsteps >> walkingSpeed) & 1) * 2;
+				//On récupère les sprites de dépalcement horizontaux en fonction du nombre de pas
+				flipTop = (movingdir - 1) % 2;
+				// si le joueur va à droite (movingdir=3) fliptop =0 s'il va à gauche fliptop=1
+				// La partie du code ci-dessous ne s'occupe que de rendre le visage du personnage.
+				screen.render(xOffset + (modifier * flipTop), yOffset, xTile + yTile * 32, colour, flipTop, scale);
+				screen.render(xOffset + modifier - (modifier * flipTop), yOffset, (xTile + 1) + yTile * 32, colour, flipTop,scale);
+			}
+		
 
 		if (!isSwimming) {
 		// La partie du code ci-dessous s'occupe de rendre le corps du perso quand il ne nage pas
