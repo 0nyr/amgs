@@ -1,9 +1,6 @@
 # These are the files that shouldn't be tracked by Git
 # Test cmd: git status --ignored
 
-# Directories
-tes	# ignore everything in the directory
-
-# Specific files
-LICENSE
-/bin/
+# compiled files
+*.class
+target/

@@ -1,0 +1,81 @@
+# done on hp elitebook folio 1040 g2 (2020)
+
+from:
+DisplayMode[] dms = gDevice.getDisplayModes();
+for (int i=0; i<dms.length; i++) {
+	System.out.println(dms[i]);
+}
+
+use to set Display Mode:
+DisplayMode(int width, int height, int bitDepth, int refreshRate)
+Create a new display mode object with the supplied parameters.
+
+DisplayMode bestDisplayMode =
+new DisplayMode(1920, 1080, 
+	DisplayMode.BIT_DEPTH_MULTI, 60);
+gDevice.setDisplayMode(bestDisplayMode);
+
+1920x1080x[Multi depth]@60Hz
+1920x1080x[Multi depth]@120Hz
+1680x1050x[Multi depth]@60Hz
+1600x1024x[Multi depth]@60Hz
+1400x1050x[Multi depth]@60Hz
+1600x900x[Multi depth]@120Hz
+1600x900x[Multi depth]@60Hz
+1280x1024x[Multi depth]@60Hz
+1440x900x[Multi depth]@60Hz
+1400x900x[Multi depth]@60Hz
+1280x960x[Multi depth]@60Hz
+1440x810x[Multi depth]@120Hz
+1368x768x[Multi depth]@60Hz
+1360x768x[Multi depth]@60Hz
+1280x800x[Multi depth]@120Hz
+1280x800x[Multi depth]@60Hz
+1152x864x[Multi depth]@60Hz
+1280x720x[Multi depth]@120Hz
+1280x720x[Multi depth]@60Hz
+1024x768x[Multi depth]@120Hz
+1024x768x[Multi depth]@60Hz
+960x720x[Multi depth]@120Hz
+928x696x[Multi depth]@120Hz
+896x672x[Multi depth]@120Hz
+1024x576x[Multi depth]@120Hz
+1024x576x[Multi depth]@60Hz
+960x600x[Multi depth]@120Hz
+960x540x[Multi depth]@120Hz
+960x540x[Multi depth]@60Hz
+800x600x[Multi depth]@120Hz
+800x600x[Multi depth]@60Hz
+800x600x[Multi depth]@56Hz
+840x525x[Multi depth]@120Hz
+864x486x[Multi depth]@60Hz
+800x512x[Multi depth]@120Hz
+700x525x[Multi depth]@120Hz
+800x450x[Multi depth]@120Hz
+640x512x[Multi depth]@120Hz
+720x450x[Multi depth]@120Hz
+700x450x[Multi depth]@120Hz
+640x480x[Multi depth]@120Hz
+640x480x[Multi depth]@60Hz
+720x405x[Multi depth]@60Hz
+720x405x[Multi depth]@59Hz
+684x384x[Multi depth]@120Hz
+680x384x[Multi depth]@120Hz
+640x400x[Multi depth]@120Hz
+576x432x[Multi depth]@120Hz
+640x360x[Multi depth]@120Hz
+640x360x[Multi depth]@60Hz
+640x360x[Multi depth]@59Hz
+512x384x[Multi depth]@120Hz
+512x288x[Multi depth]@120Hz
+480x270x[Multi depth]@119Hz
+480x270x[Multi depth]@120Hz
+400x300x[Multi depth]@121Hz
+400x300x[Multi depth]@113Hz
+432x243x[Multi depth]@120Hz
+432x243x[Multi depth]@119Hz
+320x240x[Multi depth]@120Hz
+360x202x[Multi depth]@119Hz
+360x202x[Multi depth]@118Hz
+320x180x[Multi depth]@120Hz
+320x180x[Multi depth]@119Hz
