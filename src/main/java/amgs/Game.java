@@ -118,46 +118,6 @@ public class Game implements Runnable {
 		
 		stop();
 	}
-	/*
-	public void run() {
-		//adapted by Onyr from Minecraft game loop
-		// more info: https://gamedev.stackexchange.com/questions/52841/the-most-efficient-and-accurate-game-loop
-		init();
-		
-		double amountOfTicks = 60.0;
-		double timePerTick = 1000000000 / amountOfTicks;
-		double fractionTimeOfATick = 0;
-		long now;
-		long currentDeltaTime;
-		long lastTime = System.nanoTime();
-		long timer = System.currentTimeMillis();
-		int ticks = 0;
-		
-		while(running) {
-			now = System.nanoTime();
-			fractionTimeOfATick += (now - lastTime) / timePerTick;	// how much time spent before calling tick/render
-			timer += now - lastTime;
-			lastTime = now;
-			
-			while(fractionTimeOfATick >= 1) {
-				tick();
-				fractionTimeOfATick--;
-			}
-			render();
-			ticks++;
-			
-			currentDeltaTime = System.currentTimeMillis() - timer;
-			if( currentDeltaTime > 1000) {
-				System.out.print("ticks/frames = "+ticks);
-				System.out.println("currentDeltaTime = "+currentDeltaTime);
-				ticks = 0;
-				timer += 1000;
-			}
-			
-		}
-		
-		stop();
-	}*/
 	
 	private void init() {
 		toolkit = Toolkit.getDefaultToolkit();

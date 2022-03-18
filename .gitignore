@@ -4,3 +4,6 @@
 # compiled files
 *.class
 target/
+
+# generated files
+spritemap_test.png
